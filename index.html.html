@@ -28,9 +28,10 @@ body{
   color:white;
   font-family:'Orbitron',sans-serif;
   overflow:hidden;
-  height:100vh;
+  min-height:100vh;
   cursor:none;
   position:relative;
+  touch-action:pan-y;
 }
 
 /* GIF FUNDO */
@@ -41,7 +42,7 @@ body{
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:.08;
+  opacity:.16;
   z-index:-20;
   pointer-events:none;
 }
@@ -405,12 +406,74 @@ body{
   height:34px;
 }
 
+/* MOBILE */
+
+@media(max-width:900px){
+
+  body{
+    overflow:hidden;
+    cursor:auto;
+  }
+
+  .cursor,
+  .smoke{
+    display:none;
+  }
+
+  .logo{
+    font-size:38px;
+  }
+
+  .bio{
+    width:95%;
+    font-size:11px;
+    padding:16px;
+    line-height:1.5;
+  }
+
+  .main{
+    padding:15px;
+  }
+
+  .carousel-wrapper{
+    width:100%;
+    overflow:hidden;
+    margin-top:20px;
+  }
+
+  .carousel{
+    gap:18px;
+  }
+
+  .card{
+    width:220px;
+  }
+
+  .card img{
+    height:220px;
+  }
+
+  .socials{
+    gap:14px;
+    margin-top:20px;
+  }
+
+  .socials a{
+    width:55px;
+    height:55px;
+  }
+
+  .socials img{
+    width:28px;
+    height:28px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
-
-<!-- GIF -->
 
 <img src="giforbital.gif" class="bg-gif">
 
@@ -444,156 +507,77 @@ anime, and internet culture.
 
 </section>
 
-<!-- MUSIC -->
-
 <div class="carousel-wrapper">
 
 <div class="carousel" id="carousel">
 
-<!-- CARD 1 -->
-
 <div class="card">
-
 <img src="https://i.scdn.co/image/ab67616d0000b2734d8151af7b09dfa5d037b489">
-
 <div class="content">
-
-<div class="music-title">
-MONTAGEM CAMERA LENTA
-</div>
-
+<div class="music-title">MONTAGEM CAMERA LENTA</div>
 <div class="player">
-
-<button
-class="play-btn"
-onclick="toggleMusic(this, 'cameralenta.mp3')">
-▶
-</button>
-
+<button class="play-btn" onclick="toggleMusic(this, 'cameralenta.mp3')">▶</button>
 <div class="wave">
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-
 </div>
 </div>
 </div>
-
-<!-- CARD 2 -->
 
 <div class="card">
-
 <img src="https://i.scdn.co/image/ab67616d0000b2737ab9130cba70140e95316245">
-
 <div class="content">
-
-<div class="music-title">
-MONTAGEM ALUCINANTE
-</div>
-
+<div class="music-title">MONTAGEM ALUCINANTE</div>
 <div class="player">
-
-<button
-class="play-btn"
-onclick="toggleMusic(this, 'alucinante.mp3')">
-▶
-</button>
-
+<button class="play-btn" onclick="toggleMusic(this, 'alucinante.mp3')">▶</button>
 <div class="wave">
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-
 </div>
 </div>
 </div>
-
-<!-- CARD 3 -->
 
 <div class="card">
-
 <img src="https://i.scdn.co/image/ab67616d0000b273402ac8a6eae5d96ba7016b80">
-
 <div class="content">
-
-<div class="music-title">
-MALDITO MOVIMIENTO
-</div>
-
+<div class="music-title">MALDITO MOVIMIENTO</div>
 <div class="player">
-
-<button
-class="play-btn"
-onclick="toggleMusic(this, 'movimiento.mp3')">
-▶
-</button>
-
+<button class="play-btn" onclick="toggleMusic(this, 'movimiento.mp3')">▶</button>
 <div class="wave">
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-
 </div>
 </div>
 </div>
-
-<!-- CARD 4 -->
 
 <div class="card">
-
 <img src="https://i.scdn.co/image/ab67616d0000b273e1de0586dbed430ef75934ee">
-
 <div class="content">
-
-<div class="music-title">
-MONTAGEM SENTA DEVAGAR
-</div>
-
+<div class="music-title">MONTAGEM SENTA DEVAGAR</div>
 <div class="player">
-
-<button
-class="play-btn"
-onclick="toggleMusic(this, 'sentadeva.mp3')">
-▶
-</button>
-
+<button class="play-btn" onclick="toggleMusic(this, 'sentadeva.mp3')">▶</button>
 <div class="wave">
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-
 </div>
 </div>
 </div>
-
-<!-- CARD 5 -->
 
 <div class="card">
-
 <img src="https://i.scdn.co/image/ab67616d0000b273f4714e247ad22d0f3f34129e">
-
 <div class="content">
-
-<div class="music-title">
-MONTAGEM TURBO
-</div>
-
+<div class="music-title">MONTAGEM TURBO</div>
 <div class="player">
-
-<button
-class="play-btn"
-onclick="toggleMusic(this, 'turboi.mp3')">
-▶
-</button>
-
+<button class="play-btn" onclick="toggleMusic(this, 'turboi.mp3')">▶</button>
 <div class="wave">
 <span></span><span></span><span></span><span></span><span></span>
 </div>
-
 </div>
 </div>
 </div>
 
 </div>
 </div>
-
-<!-- SOCIALS -->
 
 <div class="socials">
 
@@ -647,8 +631,6 @@ document.addEventListener('mousemove',(e)=>{
   cursor.style.left = e.clientX + 'px'
   cursor.style.top = e.clientY + 'px'
 
-  /* SMOKE */
-
   const smoke = document.createElement('div')
 
   smoke.classList.add('smoke')
@@ -661,8 +643,6 @@ document.addEventListener('mousemove',(e)=>{
   setTimeout(()=>{
     smoke.remove()
   },900)
-
-  /* STARS MOVE */
 
   document.querySelectorAll('.star').forEach(star=>{
 
@@ -735,7 +715,7 @@ function toggleMusic(button, src){
 
 }
 
-/* CAROUSEL 3 ITEMS */
+/* CAROUSEL */
 
 const cards = document.querySelectorAll('.card')
 
@@ -776,27 +756,68 @@ function updateCarousel(){
 
 updateCarousel()
 
-window.addEventListener('wheel',(e)=>{
+function nextCard(){
 
-  if(e.deltaY > 0){
+  current++
 
-    current++
-
-    if(current >= cards.length){
-      current = 0
-    }
-
-  }else{
-
-    current--
-
-    if(current < 0){
-      current = cards.length - 1
-    }
-
+  if(current >= cards.length){
+    current = 0
   }
 
   updateCarousel()
+
+}
+
+function prevCard(){
+
+  current--
+
+  if(current < 0){
+    current = cards.length - 1
+  }
+
+  updateCarousel()
+
+}
+
+/* PC */
+
+window.addEventListener('wheel',(e)=>{
+
+  if(e.deltaY > 0){
+    nextCard()
+  }else{
+    prevCard()
+  }
+
+})
+
+/* MOBILE TOUCH */
+
+let touchStartX = 0
+let touchEndX = 0
+
+window.addEventListener('touchstart',(e)=>{
+
+  touchStartX = e.changedTouches[0].screenX
+
+})
+
+window.addEventListener('touchend',(e)=>{
+
+  touchEndX = e.changedTouches[0].screenX
+
+  if(touchStartX - touchEndX > 50){
+
+    nextCard()
+
+  }
+
+  if(touchEndX - touchStartX > 50){
+
+    prevCard()
+
+  }
 
 })
 
