@@ -193,9 +193,13 @@ body{
 
 .carousel-wrapper{
   width:100%;
+  max-width:980px;
   overflow:hidden;
-  margin-top:20px;
-  padding:20px 0;
+  margin-top:25px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .carousel{
@@ -203,7 +207,7 @@ body{
   align-items:center;
   gap:28px;
   transition:transform .45s ease;
-  padding:10px 40vw;
+  will-change:transform;
 }
 
 /* CARD */
@@ -438,13 +442,13 @@ body{
   }
 
   .carousel-wrapper{
-    margin-top:10px;
+    max-width:100%;
     overflow:hidden;
+    margin-top:15px;
   }
 
   .carousel{
-    gap:16px;
-    padding:10px 50vw;
+    gap:14px;
   }
 
   .card{
@@ -768,13 +772,21 @@ function updateCarousel(){
   cards[right].classList.add('side')
 
   const cardWidth =
-  window.innerWidth <= 900 ? 226 : 288
+  window.innerWidth <= 900
+  ? 224
+  : 288
+
+  const wrapper =
+  document.querySelector('.carousel-wrapper')
+
+  const center =
+  wrapper.offsetWidth / 2
 
   const offset =
-  current * cardWidth
+  (current * cardWidth) - center + (cardWidth / 2)
 
   carousel.style.transform =
-  `translateX(calc(50% - ${offset}px - 105px))`
+  `translateX(${-offset}px)`
 
 }
 
