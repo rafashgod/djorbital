@@ -1,124 +1,8 @@
+<!-- SUBSTITUA SOMENTE SUA PARTE DO SCRIPT DO CAROUSEL POR ISSO -->
+
 <script>
 
-/* STARS */
-
-const stars = document.getElementById('stars')
-
-for(let i=0;i<180;i++){
-
-  const star = document.createElement('div')
-
-  star.classList.add('star')
-
-  star.style.left = Math.random()*100 + 'vw'
-  star.style.top = Math.random()*100 + 'vh'
-
-  star.dataset.speed = Math.random()*2
-
-  stars.appendChild(star)
-
-}
-
-/* CURSOR */
-
-if(window.innerWidth > 900){
-
-const cursor = document.querySelector('.cursor')
-
-document.addEventListener('mousemove',(e)=>{
-
-  cursor.style.left = e.clientX + 'px'
-  cursor.style.top = e.clientY + 'px'
-
-  const smoke = document.createElement('div')
-
-  smoke.classList.add('smoke')
-
-  smoke.style.left = e.clientX + 'px'
-  smoke.style.top = e.clientY + 'px'
-
-  document.body.appendChild(smoke)
-
-  setTimeout(()=>{
-    smoke.remove()
-  },900)
-
-  document.querySelectorAll('.star').forEach(star=>{
-
-    const speed = star.dataset.speed
-
-    const x = (window.innerWidth/2 - e.clientX) * speed * 0.01
-    const y = (window.innerHeight/2 - e.clientY) * speed * 0.01
-
-    star.style.transform =
-    `translate(${x}px, ${y}px)`
-
-  })
-
-})
-
-}
-
-/* AUDIO */
-
-let currentAudio = null
-let currentButton = null
-
-function toggleMusic(button, src){
-
-  const wave =
-  button.parentElement.querySelector('.wave')
-
-  if(
-    currentAudio &&
-    currentButton === button &&
-    !currentAudio.paused
-  ){
-
-    currentAudio.pause()
-
-    button.innerHTML = '▶'
-
-    wave.classList.remove('active')
-
-    return
-  }
-
-  if(currentAudio){
-
-    currentAudio.pause()
-
-    document.querySelectorAll('.play-btn')
-    .forEach(btn => btn.innerHTML = '▶')
-
-    document.querySelectorAll('.wave')
-    .forEach(w => w.classList.remove('active'))
-
-  }
-
-  currentAudio = new Audio(src)
-
-  currentButton = button
-
-  currentAudio.play()
-
-  button.innerHTML = '❚❚'
-
-  wave.classList.add('active')
-
-  currentAudio.onended = ()=>{
-
-    button.innerHTML = '▶'
-
-    wave.classList.remove('active')
-
-  }
-
-}
-
-/* =========================
-CAROUSEL NOVO FIXO CENTRAL
-========================= */
+/* CAROUSEL FIXO CENTRAL */
 
 const carousel = document.getElementById('carousel')
 const cards = document.querySelectorAll('.card')
@@ -137,12 +21,12 @@ function updateCarousel(){
 
   cards[current].classList.add('active')
 
-  let left =
+  const left =
   current - 1 < 0
   ? cards.length - 1
   : current - 1
 
-  let right =
+  const right =
   current + 1 >= cards.length
   ? 0
   : current + 1
@@ -155,15 +39,21 @@ function updateCarousel(){
   ? 224
   : 288
 
-  const totalMove =
-  current * cardWidth
+  const wrapper =
+  document.querySelector('.carousel-wrapper')
+
+  const wrapperCenter =
+  wrapper.offsetWidth / 2
+
+  const translate =
+  (current * cardWidth) - wrapperCenter + (cardWidth / 2)
 
   carousel.style.transform =
-  `translateX(calc(50% - ${totalMove}px - ${cardWidth / 2}px))`
+  `translateX(${-translate}px)`
 
 }
 
-/* inicia */
+/* iniciar */
 
 updateCarousel()
 
@@ -178,13 +68,17 @@ function nextCard(){
   current++
 
   if(current >= cards.length){
+
     current = 0
+
   }
 
   updateCarousel()
 
   setTimeout(()=>{
+
     isAnimating = false
+
   },450)
 
 }
@@ -200,13 +94,17 @@ function prevCard(){
   current--
 
   if(current < 0){
+
     current = cards.length - 1
+
   }
 
   updateCarousel()
 
   setTimeout(()=>{
+
     isAnimating = false
+
   },450)
 
 }
@@ -214,8 +112,6 @@ function prevCard(){
 /* SCROLL */
 
 window.addEventListener('wheel',(e)=>{
-
-  e.preventDefault()
 
   if(e.deltaY > 0){
 
@@ -227,9 +123,9 @@ window.addEventListener('wheel',(e)=>{
 
   }
 
-},{ passive:false })
+})
 
-/* TOUCH MOBILE */
+/* MOBILE */
 
 let touchStartX = 0
 let touchEndX = 0
